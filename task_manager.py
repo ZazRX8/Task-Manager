@@ -1,3 +1,14 @@
+class Task:
+    def __init__(self, name, priority, completed=False):
+        self.name = name
+        self.priority = priority
+        self.completed = completed
+
+    def display(self):
+        status = "Выполнено" if self.completed else "Не выполнено"
+        print(f"Задача: {self.name}, Приоритет: {self.priority}, Статус: {status}")
+
+
 tasks = []  # Список задач
 
 
@@ -8,19 +19,18 @@ def add_task():
         input("Введите приоритет задачи (1 - высокий, 2 - средний, 3 - низкий): "))
     is_completed = input("Задача выполнена? (да/нет): ").lower() == "да"
 
-    # Добавляем задачу в список
-    tasks.append({"name": task_name, "priority": priority,
-                 "completed": is_completed})
+    # Создаём обьект задач и добавляем его в список
+    task = Task(task_name, priority, is_completed)
+    tasks.append(task)
 
 
 def display_tasks():
     # Сортировка задач по приоритету
-    tasks.sort(key=lambda x: x["priority"])
+    tasks.sort(key=lambda x: x.priority)
 
     print("\n--- Список задач ---")
     for task in tasks:
-        status = "Выполнено" if task["completed"] else "Не выполнено"
-        print(f"Задача: {task['name']}, Приоритет: {task['priority']}, Статус: {status}")
+        task.display()
 
 
 def main():
